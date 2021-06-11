@@ -1,59 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useState, useEffect } from 'react'
+import useEfffectTutor  from './tutorials/useEffectTutor'
+import SimpleSelect  from './components/simpleSelect'
 
-
-export default function App() {
+class App extends React.Component() {
+  constructor(props) {
+    super(props)
+    this.state = {tutorial: null}
+  }
   
-  //material ui
-  const useStyles = makeStyles((theme) => ({
-    formControl: {
-      margin: theme.spacing(1),
-      minWidth: 120,
-    },
-    selectEmpty: {
-      marginTop: theme.spacing(2),
-    },
-  }));
-  
-  //material ui
-  export default function SimpleSelect() {
-    const classes = useStyles();
-    const [age, setAge] = React.useState('');
-  
-    const handleChange = (event) => {
-      setAge(event.target.value);
-    };
+  createTutorial = (tutor) => {
+    this.setState({tutorial:tutor})
+    console.print('inside app' + tutor)
+  }
 
-  const [tutorials, setTutorials] = useState([])
-
-
- 
-  return (
-    <>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
-
-    <div>
-      <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-          <Select
-            labelId="demo-simple-select-label"
-            id="demo-simple-select"
-            value={age}
-            onChange={handleChange}
-          >
-            tutorials.map((tutor) => 
-            <MenuItem value={tutor}>{tutor}</MenuItem>)
-            <MenuItem value={10}>Ten</MenuItem>
-            <MenuItem value={20}>Twenty</MenuItem>
-            <MenuItem value={30}>Thirty</MenuItem>
-          </Select>
-      </FormControl>
-
-
-    </div>
-    </>
-  );
-}
+  render() {
+    return(
+      <>
+        <div>
+          <SimpleSelect createTutorial = {() => thicreateTutorial}/>
+          {tutorial == 'useEffect' && <useEffectTutor />}
+        </div>
+      </>
+    );   
+  }
+});
 

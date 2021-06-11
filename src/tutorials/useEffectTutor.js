@@ -1,9 +1,7 @@
-import logo from './logo.svg';
-import './App.css';
 import React, { useState, useEffect } from 'react'
 
 
-export default function useEffect() {
+export default function useEffectTutor() {
 
   const [resourceType,  setResourceType] = useState('posts')
   const [items, setItems] = useState([])
