@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react'
 
 
-export default function useEffectTutor() {
+export default function UseEffectTutor() {
 
   const [resourceType,  setResourceType] = useState('posts')
-  const [items, setItems] = useState([])
+  const [listItems, setlistItems] = useState([])
   const [windowWidth, setwindowWidth] = useState(window.innerWidth)
-
-
-  const handleResize = () => {
-    setwindowWidth(window.innerWidth)
-  }
 
 
   // wheneber a button below (inside return()) is selected, react re-renders, 
   // and the console prints 'render' 
   console.log('render')
+
+  const handleResize = () => {
+    setwindowWidth(window.innerWidth)
+  }
 
   // this is another way of using useEffect, rather than passing a variable, we can 
   // add an event listener inside the function that tracks things not in react such as
@@ -32,7 +31,7 @@ export default function useEffectTutor() {
     //in this case the removeEventListner is called first to clean up the eventListner from the previous
     //execution
     return () => {
-      windowWidth.removeEventListener('resize', handleResize)
+      window.removeEventListener('resize', handleResize)
     }
   }, [])
   
@@ -44,23 +43,28 @@ export default function useEffectTutor() {
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/${resourceType}`)
       .then(response => response.json())
-      .then(json => setItems(json))
+      .then(json => setlistItems(json))
   }, [resourceType])
 
  
   return (
-    <>
-      <div>{windowWidth}</div>
-      <div>
-        <button onClick ={() => setResourceType('posts')}>Posts</button>
-        <button onClick ={() => setResourceType('users')}>Users</button>
-        <button onClick ={() => setResourceType('comments')}>Comments</button>
-      </div>
-      <h1>{resourceType}</h1>
-        {items.map(item => {
-          return <pre>{JSON.stringify(item)}</pre>
-        })}
-    </>
+    <div className = "widget">
+        <div className ="tutorial"> 
+          <div>{windowWidth}</div>
+          <div>
+            <button onClick ={() => setResourceType('posts')}>Posts</button>
+            <button onClick ={() => setResourceType('users')}>Users</button>
+            <button onClick ={() => setResourceType('comments')}>Comments</button>
+          </div>
+          <h1>{resourceType}</h1>
+            {listItems.map(item => {
+              return <pre key={listItems.findIndex(cur => cur == item)}>{JSON.stringify(item)}</pre>
+            })}
+        </div> 
+        <div className ="notes">
+        <a href="https://www.youtube.com/watch?v=0ZJgIjIuY7U&t=673s">tutorial: Learn useEffect in 13 minutes by Web Dev Simplified</a> 
+        </div>
+    </div>
   );
 }
 

@@ -28,12 +28,13 @@ export default function SimpleSelect(props) {
         console.log(event.target.value)
         setTutor(event.target.value);
         props.createTutorial(event.target.value);
+        event.preventDefault();
     };
 
     return (
         <div>
         <FormControl className={classes.formControl}>
-            <InputLabel id="demo-simple-select-label">Age</InputLabel>
+            <InputLabel id="demo-simple-select-label">Tutorial</InputLabel>
             <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

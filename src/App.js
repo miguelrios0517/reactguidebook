@@ -1,27 +1,32 @@
-import React, { useState, useEffect } from 'react'
-import useEfffectTutor  from './tutorials/useEffectTutor'
+import React from 'react'
 import SimpleSelect  from './components/simpleSelect'
 
-class App extends React.Component() {
+import UseEffectTutor  from './tutorials/useEffectTutor'
+import UseRefTutor  from './tutorials/useRefTutor'
+
+class App extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {tutorial: null}
+    this.state = {
+      tutorial: null
+    }
   }
   
   createTutorial = (tutor) => {
+    console.log('inside app ' + tutor)
     this.setState({tutorial:tutor})
-    console.print('inside app' + tutor)
   }
 
   render() {
     return(
       <>
-        <div>
-          <SimpleSelect createTutorial = {() => thicreateTutorial}/>
-          {tutorial == 'useEffect' && <useEffectTutor />}
-        </div>
+        <SimpleSelect createTutorial = {this.createTutorial}/>
+        {this.state.tutorial == 'useEffect' && <UseEffectTutor />}
+        {this.state.tutorial == 'useRef' && <UseRefTutor />}
       </>
     );   
   }
-});
+}
+
+export default App;
 
